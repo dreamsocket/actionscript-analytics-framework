@@ -13,9 +13,9 @@
 				<methodCall>
 					<method>doJS</method>				
 					<arguments>
-						<argument>1</argument>
-						<argument>2</argument>
-						<argument>3</argument>
+						<argument>${data} a</argument>
+						<argument>b</argument>
+						<argument>c</argument>
 					</arguments>
 				</methodCall>
 			</methodCalls>

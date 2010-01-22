@@ -51,28 +51,26 @@ package
 		
 		public function TestJSTracker()
 		{
-			//this.m_loader = new URLLoader();
-			//this.m_loader.addEventListener(Event.COMPLETE, this.onXMLLoaded);
-			//this.m_loader.addEventListener(IOErrorEvent.IO_ERROR, this.onErrorOccurred);
-			//this.m_loader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, this.onErrorOccurred);
-			//this.m_loader.load(new URLRequest("test_tracking_omniture.xml"));
-			
-			var config:JSTrackerConfig = new JSTrackerConfig();
-			var trackHandler:JSTrackHandler;
-			
-			this.m_tracker = new JSTracker();
-			this.m_tracker.config = config;
-			
-			trackHandler = new JSTrackHandler();
-			trackHandler.ID = "track3";
-			trackHandler.methodCalls = [new JSMethodCall("doRandomThing", [1, 2, "3...{data.id}"])];
-			
-			config.trackHandlers["track2"] = trackHandler; 
+			this.m_loader = new URLLoader();
+			this.m_loader.addEventListener(Event.COMPLETE, this.onXMLLoaded);
+			this.m_loader.addEventListener(IOErrorEvent.IO_ERROR, this.onErrorOccurred);
+			this.m_loader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, this.onErrorOccurred);
+			this.m_loader.load(new URLRequest("test_tracking_javascript.xml"));
 
+			//var config:JSTrackerConfig = new JSTrackerConfig();
+			//var trackHandler:JSTrackHandler;
+			//this.m_tracker = new JSTracker();
+			//this.m_tracker.config = config;			
+			//trackHandler = new JSTrackHandler();
+			//trackHandler.ID = "track3";
+			//trackHandler.methodCalls = [new JSMethodCall("doJS", [1, 2, "3...${data.id}"])];
 			
-			this.m_tracker.track(new Track("track1", "test string1"));
-			this.m_tracker.track(new Track("track2", {id:"testid"}));
-			this.m_tracker.track(new Track("track3", "test string3"));			
+			//config.trackHandlers["track1"] = trackHandler; 
+			//config.trackHandlers["track2"] = trackHandler; 
+			
+			//this.m_tracker.track(new Track("track1", "test string1"));
+			//this.m_tracker.track(new Track("track2", {id:"testid"}));
+			//this.m_tracker.track(new Track("track3", "test string3"));			
 		}
 
 
@@ -84,7 +82,12 @@ package
 		
 		private function onXMLLoaded(p_event:Event):void
 		{
-
+			this.m_tracker = new JSTracker();
+			this.m_tracker.config = new JSTrackerConfigXMLDecoder().decode(new XML(this.m_loader.data));	
+			
+			this.m_tracker.track(new Track("track1", "test string1"));
+			this.m_tracker.track(new Track("track2", {id:"testid"}));
+			this.m_tracker.track(new Track("track3", "test string3"));			
 		}
 	}
 }

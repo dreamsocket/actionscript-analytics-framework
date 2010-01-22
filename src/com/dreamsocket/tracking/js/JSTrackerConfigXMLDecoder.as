@@ -71,6 +71,7 @@ package com.dreamsocket.tracking.js
 				handler = new JSTrackHandler();
 				for each(methodCallNode in p_trackHandlerNode.methodCalls.methodCall)
 				{
+					handler.ID = ID;
 					handler.methodCalls.push(this.createMethodCall(methodCallNode[0]));
 				}
 				p_trackHandlers[ID] = handler;
@@ -80,10 +81,17 @@ package com.dreamsocket.tracking.js
 		protected function createMethodCall(p_methodNode:XML):JSMethodCall
 		{
 			var methodCall:JSMethodCall = new JSMethodCall(p_methodNode.ID.toString());
-			var arguments:Array = p_methodNode.arguments.argument;
-			var argumentNode
-			for each()
-			methodCall.arguments
+			var argumentNodes:XMLList = p_methodNode.arguments.argument;
+			var argumentNode:XML;
+			
+			methodCall.method = p_methodNode.method.toString();
+			
+			for each(argumentNode in argumentNodes)
+			{
+				methodCall.arguments.push(argumentNode);
+			}
+			
+			return methodCall;
 		}
 	}
 }
