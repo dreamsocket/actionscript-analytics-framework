@@ -1,20 +1,29 @@
 /**
- * Dreamsocket, Inc.
- *
- * Copyright  2009 Dreamsocket, Inc..
- * All Rights Reserved.
- *
- * This software (the "Software") is the property of Dreamsocket, Inc. and is protected by U.S. and
- * international intellectual property laws. No license is granted with respect to the
- * software and users may not, among other things, reproduce, prepare derivative works
- * of, modify, distribute, sublicense, reverse engineer, disassemble, remove, decompile,
- * or make any modifications of the Software without written permission from Dreamsocket, Inc..
- * Further, Dreamsocket, Inc. does not authorize any user to remove or alter any trademark, logo,
- * copyright or other proprietary notice, legend, symbol, or label in the Software.
- * This notice is not intended to, and shall not, limit any rights Dreamsocket, Inc. has under
- * applicable law.
- *
- */
+* Dreamsocket, Inc.
+* http://dreamsocket.com
+* Copyright  2010 Dreamsocket, Inc.
+* 
+* Permission is hereby granted, free of charge, to any person
+* obtaining a copy of this software and associated documentation
+* files (the "Software"), to deal in the Software without
+* restriction, including without limitation the rights to use,
+* copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the
+* Software is furnished to do so, subject to the following
+* conditions:
+* 
+* The above copyright notice and this permission notice shall be
+* included in all copies or substantial portions of the Software.
+* 
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+* OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+* NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+* HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+* WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+* OTHER DEALINGS IN THE SOFTWARE.
+**/
   
   
 package com.dreamsocket.tracking 
