@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- tracking: OMNITURE -->
+<omniture>
+<!-- enabled: specifies whether Omniture tracking will be sent -->
+	<enabled>true</enabled>
+	<!-- params: 
+		allows you to generically assign values to all omniture values
+		NOTE: params set will be sent for every track
+		This can be use to set special props like <eVar23>pga_mosaic_player_09</eVar23>
+		-->
+	<params>
+		<account>foodotcom</account>
+		<dc>122</dc>
+		<delayTracking>2</delayTracking>
+		<trackingServer>stats.foo.com</trackingServer>
+		<visitorNameSpace>foo</visitorNameSpace> 
+		<trackLocal>true</trackLocal>
+	</params>
+	<trackHandlers>
+		<trackHandler>
+			<ID>track1</ID>
+			<trackLink>
+				<URL>LiveAt_videoevent</URL>
+				<type>o</type>
+				<name>Mosiac Live Stream</name>					
+				<params>
+					<prop7>${data} Leaderboard Link</prop7>
+					<eVar7>${data} Leaderboard Link</eVar7>
+				</params>
+			</trackLink>
+		</trackHandler>
+				
+		<trackHandler>
+			<ID>track2</ID>
+			<trackLink>
+				<URL>LiveAt_videoevent</URL>
+				<type>o</type>
+				<name>Mosiac Live Stream</name>					
+				<params>
+					<prop7>${data.id} Scorecard Search</prop7>
+					<eVar7>${data.id} Scorecard Search</eVar7>
+					<events>event14</events>
+					<eVar8>foo</eVar8>
+				</params>
+			</trackLink>
+		</trackHandler>	
+		
+		<trackHandler>
+			<ID>track3</ID>
+			<track>				
+				<params>
+					<eVar8>foo</eVar8>
+					<events>event17</events>
+				</params>
+			</track>
+		</trackHandler>																							
+	</trackHandlers>
+</omniture>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- url TRACKING 
+	defines a tracker that can ping URLs for a specific track request
+-->
+<JavaScript>
+	<!-- enabled: specifies whether url tracking will be sent -->
+	<enabled>true</enabled>	
+
+	<trackHandlers>
+		<trackHandler>
+			<ID>track1</ID>
+			<methodCalls>
+				<methodCall>
+					<method>doJS</method>				
+					<arguments>
+						<argument>1</argument>
+						<argument>2</argument>
+						<argument>3</argument>
+					</arguments>
+				</methodCall>
+			</methodCalls>
+		</trackHandler>				
+											
+	</trackHandlers>
+</JavaScript>

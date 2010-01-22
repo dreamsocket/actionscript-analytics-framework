@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- tracking: GOOGLE -->
+<google>
+<!-- enabled: specifies whether GOOGLE tracking will be sent -->
+	<enabled>true</enabled>
+	
+	<account>UA-7275490-5</account>
+	<visualDebug>false</visualDebug>	 
+	<trackingMode>AS3</trackingMode>	
+
+	<trackHandlers>
+		<trackHandler>
+			<ID>track1</ID>
+			<trackPageView>				
+				<URL>${data} Scorecard Nav</URL>
+			</trackPageView>
+		</trackHandler>	
+				
+		<trackHandler>
+			<ID>track2</ID>
+			<trackEvent>
+				<category>LiveAt_videoevent1</category>
+				<action>o1</action>
+				<label>Mosiac Live Stream1</label>					
+				<value>1</value>
+			</trackEvent>
+		</trackHandler>
+				
+		<trackHandler>
+			<ID>track3</ID>
+			<trackEvent>
+				<category>LiveAt_videoevent2</category>
+				<action>o2</action>
+			</trackEvent>
+		</trackHandler>	
+		
+																						
+	</trackHandlers>
+</google>

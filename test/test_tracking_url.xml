@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- url TRACKING 
+	defines a tracker that can ping URLs for a specific track request
+-->
+<URL>
+	<!-- enabled: specifies whether url tracking will be sent -->
+	<enabled>true</enabled>	
+	
+	<!-- URL track handlers specify a way to respond to a specifically name track request
+		ID - specifies the specific named track request
+		URLs - specifies a list of URLs to ping for that specific track request
+			each URL is actually a template. 
+			Therefore the URL can opt to use data which is specific to that named request.
+			This is done using a wrapper notation {data}, specifying the value be replaced by dynamic data.
+			For example: a mediaStarted request may be sent a media object. 
+			This media object is represented by {data} in the template.
+			Thus a template of http://foo.com?{data.id} would replace {data.id} with the media's ID like http://foo.com?1234
+					
+	-->		
+	<trackHandlers>
+		<trackHandler>
+			<ID>track1</ID>
+			<URLs>
+				<URL>http://foo.com/track1.gif</URL>
+			</URLs>
+		</trackHandler>				
+				
+		<trackHandler>
+			<ID>track2</ID>
+			<URLs>
+				<URL>http://foo.com/track2.gif?id=${data.id}</URL>
+			</URLs>
+		</trackHandler>
+		
+		<trackHandler>
+			<ID>track3</ID>
+			<URLs>
+				<URL>http://foo.com/track3.gif?id=${data}</URL>
+			</URLs>
+		</trackHandler>								
+	</trackHandlers>
+</URL>
