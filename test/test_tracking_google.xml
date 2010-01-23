@@ -4,7 +4,7 @@
 <!-- enabled: specifies whether GOOGLE tracking will be sent -->
 	<enabled>true</enabled>
 	
-	<account>UA-7275490-5</account>
+	<account>UA-5555555-5</account>
 	<visualDebug>false</visualDebug>	 
 	<trackingMode>AS3</trackingMode>	
 
