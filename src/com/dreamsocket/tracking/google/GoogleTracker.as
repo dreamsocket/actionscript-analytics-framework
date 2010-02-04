@@ -58,6 +58,7 @@ package com.dreamsocket.tracking.google
 		{
 			super();
 			
+			this.m_config = new GoogleTrackerConfig();
 			this.m_display = p_display;
 			this.m_enabled = true;
 			this.m_trackHandlers = new Dictionary();

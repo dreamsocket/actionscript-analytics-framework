@@ -56,6 +56,7 @@ package com.dreamsocket.tracking.omniture
 		{
 			super();
 			
+			this.m_config = new OmnitureTrackerConfig();
 			this.m_enabled = true;
 			this.m_service = new OmnitureService(p_display == null ? OmnitureTracker.display : p_display);
 			this.m_trackHandlers = new Dictionary();
