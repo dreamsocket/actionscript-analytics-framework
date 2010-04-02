@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="dreamsocket_actionscript_analytics" default="buildAll" basedir=".">
+	
+	<!-- FLEX TASKS -->
+	<property name="FLEX_HOME" 				value="/tools/flash/flexsdk/4_0"/>
+    <taskdef resource="flexTasks.tasks" 	classpath="${FLEX_HOME}/ant/lib/flexTasks.jar" />	
+	
+	<tstamp><format property="build.date" pattern="yyMMdd" locale="en"/></tstamp>
+	<property name="build.version.major" 	value="0" />
+	<property name="build.version.minor" 	value="2" />
+	<property name="build.version.build" 	value="0" />
+	
+	<!-- DIRECTORIES -->
+	<property name="project.libs" 		value="${basedir}/libs/"/>
+	<property name="project.output" 	value="${basedir}/bin/" />
+	<property name="project.src" 		value="${basedir}/src/" />		
+	<property name="project.name" 		value="dreamsocket_analytics" />	
+
+	<property name="swf.framerate" 		value="31" />
+	<property name="swf.width" 			value="480" />
+	<property name="swf.height" 		value="320" />	
+
+	<!-- BUILD ALL -->
+    <target name="buildAll" depends="clean,buildSWC,buildGoogleModule,buildJavaScriptModule,buildOmnitureModule,buildURLModule" />	
+	
+	
+	<!-- BUILD ALL PLUGINS -->
+    <target name="buildAllModules" depends="buildGoogleModule,buildJavaScriptModule,buildOmnitureModule,buildURLModule" />
+
+	
+	<!-- BUILD GOOGLE PLUGIN -->
+    <target name="buildGoogleModule">
+		<antcall target="compileModule">
+			<param name="module.name" value="daf_google" />
+			<param name="module.class" value="com/dreamsocket/analytics/google/GoogleTrackerModule.as" />
+		</antcall>    	
+   	</target>	
+
+	
+	<!-- BUILD JAVASCRIPT PLUGIN -->
+    <target name="buildJavaScriptModule">
+		<antcall target="compileModule">
+			<param name="module.name" value="daf_javascript" />
+			<param name="module.class" value="com/dreamsocket/analytics/js/JSTrackerModule.as" />
+		</antcall>    	
+   	</target>	
+	
+	
+	<!-- BUILD OMNITURE PLUGIN -->
+    <target name="buildOmnitureModule">	
+		<antcall target="compileModule">
+			<param name="module.name" value="daf_omniture" />
+			<param name="module.class" value="com/dreamsocket/analytics/omniture/OmnitureTrackerModule.as" />
+		</antcall>    	
+   	</target>
+	
+	
+	<!-- BUILD URL PLUGIN -->
+    <target name="buildURLModule">	
+		<antcall target="compileModule">
+			<param name="module.name" value="daf_url" />
+			<param name="module.class" value="com/dreamsocket/analytics/url/URLTrackerModule.as" />
+		</antcall>      	
+   	</target>	
+
+	
+	<!-- COMPILE SWC -->
+    <target name="buildSWC">
+        <compc output="${project.output}/${project.name}_${build.version.major}.${build.version.minor}.${build.date}.swc">
+        	<external-library-path dir="${project.libs}/" append="true" includes="**" />
+        	<include-sources dir="${project.src}" includes="**"/>
+        </compc>
+    </target>
+	
+	
+	<!-- COMPILE PLUGIN-->
+	<target name="compileModule">
+		<mxmlc 
+			file="${project.src}${module.class}" 
+			output="${project.output}${module.name}.swf"
+	      	strict="true"
+	    	static-link-runtime-shared-libraries="true"
+	  		>
+			<default-size 
+				width="1" 
+	    		height="1" />
+			<source-path 
+	   			path-element="${project.src}"/>
+	        	
+	 		<compiler.library-path 
+	     		dir="${basedir}" 
+	  			append="true">
+			<include 
+				name="libs" />
+			</compiler.library-path>
+		</mxmlc>
+	</target>	
+	
+	
+	<!-- CLEAN -->
+	<target name="clean">
+		<mkdir dir="${project.output}"/>
+		<delete>
+	    	<fileset dir="${project.output}" includes="**"/>
+	  	</delete>
+	</target>
+	
+	
+	<!-- PACKAGE -->
+	<target name="package" depends="buildAll">
+		<zip update="true" destfile="${project.output}${project.name}_${build.version.major}.${build.version.minor}.${build.date}.zip" >
+			<zipfileset dir="${basedir}" includes="bin/**,libs/**,src/**,test/**,build.xml" />
+		</zip>
+    </target>		
+	
+</project>
+

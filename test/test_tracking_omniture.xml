@@ -16,10 +16,11 @@
 		<visitorNameSpace>foo</visitorNameSpace> 
 		<trackLocal>true</trackLocal>
 	</params>
-	<trackHandlers>
-		<trackHandler>
+	<handlers>
+		<handler>
 			<ID>track1</ID>
-			<trackLink>
+			<type>trackLink</type>
+			<params>
 				<URL>LiveAt_videoevent</URL>
 				<type>o</type>
 				<name>Mosiac Live Stream</name>					
@@ -27,32 +28,34 @@
 					<prop7>${data} Leaderboard Link</prop7>
 					<eVar7>${data} Leaderboard Link</eVar7>
 				</params>
-			</trackLink>
-		</trackHandler>
+			</params>
+		</handler>
 				
-		<trackHandler>
+		<handler>
 			<ID>track2</ID>
-			<trackLink>
+			<type>trackLink</type>
+			<params>
 				<URL>LiveAt_videoevent</URL>
 				<type>o</type>
 				<name>Mosiac Live Stream</name>					
 				<params>
-					<prop7>${data.id} Scorecard Search</prop7>
+					<prop6>${data.id} Scorecard Search</prop6>
 					<eVar7>${data.id} Scorecard Search</eVar7>
 					<events>event14</events>
 					<eVar8>foo</eVar8>
 				</params>
-			</trackLink>
-		</trackHandler>	
+			</params>
+		</handler>	
 		
-		<trackHandler>
+		<handler>
 			<ID>track3</ID>
-			<track>				
+			<type>track</type>
+			<params>				
 				<params>
 					<eVar8>foo</eVar8>
 					<events>event17</events>
 				</params>
-			</track>
-		</trackHandler>																							
-	</trackHandlers>
+			</params>
+		</handler>																							
+	</handlers>
 </omniture>

@@ -28,10 +28,10 @@
  
 package  
 {
-	import com.dreamsocket.tracking.Track;
-	import com.dreamsocket.tracking.google.GoogleTrackerConfig;
-	import com.dreamsocket.tracking.google.GoogleTrackerConfigXMLDecoder;
-	import com.dreamsocket.tracking.google.GoogleTracker;
+	import com.dreamsocket.analytics.Track;
+	import com.dreamsocket.analytics.google.GoogleTrackerConfig;
+	import com.dreamsocket.analytics.google.GoogleTrackerConfigXMLDecoder;
+	import com.dreamsocket.analytics.google.GoogleTracker;
 	
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -65,7 +65,7 @@ package
 		{
 			var config:GoogleTrackerConfig = new GoogleTrackerConfigXMLDecoder().decode(new XML(this.m_loader.data));
 			
-			this.m_tracker = new GoogleTracker(this);
+			this.m_tracker = new GoogleTracker(this.stage);
 			this.m_tracker.config = config;
 			
 			this.m_tracker.track(new Track("track1", "test string"));

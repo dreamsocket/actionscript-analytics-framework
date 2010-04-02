@@ -8,32 +8,35 @@
 	<visualDebug>false</visualDebug>	 
 	<trackingMode>AS3</trackingMode>	
 
-	<trackHandlers>
-		<trackHandler>
+	<handlers>
+		<handler>
 			<ID>track1</ID>
-			<trackPageView>				
+			<type>trackPageView</type>
+			<params>				
 				<URL>${data} Scorecard Nav</URL>
-			</trackPageView>
-		</trackHandler>	
+			</params>
+		</handler>	
 				
-		<trackHandler>
+		<handler>
 			<ID>track2</ID>
-			<trackEvent>
+			<type>trackEvent</type>
+			<params>
 				<category>LiveAt_videoevent1</category>
 				<action>o1</action>
 				<label>Mosiac Live Stream1</label>					
 				<value>1</value>
-			</trackEvent>
-		</trackHandler>
+			</params>
+		</handler>
 				
-		<trackHandler>
+		<handler>
 			<ID>track3</ID>
-			<trackEvent>
+			<type>trackEvent</type>
+			<params>
 				<category>LiveAt_videoevent2</category>
 				<action>o2</action>
-			</trackEvent>
-		</trackHandler>	
+			</params>
+		</handler>	
 		
 																						
-	</trackHandlers>
+	</handlers>
 </google>

@@ -89,24 +89,30 @@ package com.dreamsocket.utils
 
 			if((HTTPUtil.allowLocalQueryStrings || Security.sandboxType == Security.REMOTE) && p_URL.indexOf( "&cacheID=" ) == -1 && p_URL.indexOf( "?cacheID=" ) == -1) 
 			{
-				var d:Date = new Date();
-				var ID:String;
-				var secsPassed:Number = (60 * d.getUTCMinutes()) + d.getUTCSeconds();
-
-				if(p_rateInSecsToCache == 0)
-				{
-					ID = String(d.valueOf());
-				}
-				else
-				{
-					ID = d.getUTCFullYear() + "" + d.getUTCMonth() + "" +d.getUTCDate() + "" +d.getUTCHours() + "-" + Math.floor(secsPassed/p_rateInSecsToCache);
-				}
-
-				request = HTTPUtil.addQueryParam(p_URL, "cacheID", ID);
+				request = HTTPUtil.addQueryParam(p_URL, "cacheID", HTTPUtil.getUniqueCacheID(p_rateInSecsToCache));
 			}
 			
 			return request; 
 		}	
+		
+		
+		public static function getUniqueCacheID(p_rateInSecsToCache:Number = 0):String
+		{
+			var d:Date = new Date();
+			var ID:String;
+			var secsPassed:Number = (60 * d.getUTCMinutes()) + d.getUTCSeconds();
+
+			if(p_rateInSecsToCache == 0)
+			{
+				ID = String(d.valueOf());
+			}
+			else
+			{
+				ID = d.getUTCFullYear() + "" + d.getUTCMonth() + "" +d.getUTCDate() + "" +d.getUTCHours() + "-" + Math.floor(secsPassed/p_rateInSecsToCache);
+			}	
+			
+			return ID;		
+		}
 		
 				
 		protected static function onPingResult(p_event:Event):void

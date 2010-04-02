@@ -17,8 +17,8 @@
 			<visitorNameSpace>foo</visitorNameSpace> 
 			<trackLocal>true</trackLocal>
 		</params>
-		<trackHandlers>
-			<trackHandler>
+		<handlers>
+			<handler>
 				<ID>track1</ID>
 				<trackLink>
 					<URL>LiveAt_videoevent</URL>
@@ -29,9 +29,9 @@
 						<eVar7>${data} Leaderboard Link</eVar7>
 					</params>
 				</trackLink>
-			</trackHandler>
+			</handler>
 					
-			<trackHandler>
+			<handler>
 				<ID>track2</ID>
 				<trackLink>
 					<URL>LiveAt_videoevent</URL>
@@ -44,9 +44,9 @@
 						<eVar8>foo</eVar8>
 					</params>
 				</trackLink>
-			</trackHandler>	
+			</handler>	
 			
-			<trackHandler>
+			<handler>
 				<ID>track3</ID>
 				<track>				
 					<params>
@@ -54,8 +54,8 @@
 						<events>event17</events>
 					</params>
 				</track>
-			</trackHandler>																							
-		</trackHandlers>
+			</handler>																							
+		</handlers>
 	</omniture>
 	!-- tracking: GOOGLE -->
 	<google>
@@ -66,15 +66,15 @@
 		<visualDebug>false</visualDebug>	 
 		<trackingMode>AS3</trackingMode>	
 	
-		<trackHandlers>
-			<trackHandler>
+		<handlers>
+			<handler>
 				<ID>track1</ID>
 				<trackPageView>				
 					<URL>${data} Scorecard Nav</URL>
 				</trackPageView>
-			</trackHandler>	
+			</handler>	
 					
-			<trackHandler>
+			<handler>
 				<ID>track2</ID>
 				<trackEvent>
 					<category>LiveAt_videoevent1</category>
@@ -82,18 +82,18 @@
 					<label>Mosiac Live Stream1</label>					
 					<value>1</value>
 				</trackEvent>
-			</trackHandler>
+			</handler>
 					
-			<trackHandler>
+			<handler>
 				<ID>track3</ID>
 				<trackEvent>
 					<category>LiveAt_videoevent2</category>
 					<action>o2</action>
 				</trackEvent>
-			</trackHandler>	
+			</handler>	
 			
 																							
-		</trackHandlers>
+		</handlers>
 	</google>
 	
 <!-- url TRACKING 
@@ -114,27 +114,27 @@
 				Thus a template of http://foo.com?{data.id} would replace {data.id} with the media's ID like http://foo.com?1234
 						
 		-->		
-		<trackHandlers>
-			<trackHandler>
+		<handlers>
+			<handler>
 				<ID>track1</ID>
 				<URLs>
 					<URL>http://foo.com/track1.gif</URL>
 				</URLs>
-			</trackHandler>				
+			</handler>				
 					
-			<trackHandler>
+			<handler>
 				<ID>track2</ID>
 				<URLs>
 					<URL>http://foo.com/track2.gif?id=${data.id}</URL>
 				</URLs>
-			</trackHandler>
+			</handler>
 			
-			<trackHandler>
+			<handler>
 				<ID>track3</ID>
 				<URLs>
 					<URL>http://foo.com/track3.gif?id=${data}</URL>
 				</URLs>
-			</trackHandler>								
-		</trackHandlers>
+			</handler>								
+		</handlers>
 	</URL>
 </tracking>

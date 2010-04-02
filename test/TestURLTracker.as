@@ -28,13 +28,9 @@
 package  
 {
 	import com.dreamsocket.analytics.Track;
-	import com.dreamsocket.analytics.google.GoogleTracker;
-	import com.dreamsocket.analytics.google.GoogleTrackerConfigXMLDecoder;
-	import com.dreamsocket.analytics.omniture.OmnitureTracker;
-	import com.dreamsocket.analytics.omniture.OmnitureTrackerConfigXMLDecoder;
-	import com.dreamsocket.analytics.url.URLTracker;
+	import com.dreamsocket.analytics.url.URLTrackerConfig;
 	import com.dreamsocket.analytics.url.URLTrackerConfigXMLDecoder;
-	import com.dreamsocket.analytics.TrackerManager;
+	import com.dreamsocket.analytics.url.URLTracker;
 	
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -43,18 +39,18 @@ package
 	import flash.net.URLRequest;
 	import flash.net.URLLoader;
 	
-	public class TestTrackingManager extends Sprite
+	public class TestURLTracker extends Sprite
 	{
 		private var m_loader:URLLoader;
+		private var m_tracker:URLTracker;
 		
-		
-		public function TestTrackingManager()
-		{			
+		public function TestURLTracker()
+		{
 			this.m_loader = new URLLoader();
 			this.m_loader.addEventListener(Event.COMPLETE, this.onXMLLoaded);
 			this.m_loader.addEventListener(IOErrorEvent.IO_ERROR, this.onErrorOccurred);
 			this.m_loader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, this.onErrorOccurred);
-			this.m_loader.load(new URLRequest("test_tracking_multiple.xml"));
+			this.m_loader.load(new URLRequest("test_tracking_url.xml"));
 		}
 
 
@@ -66,22 +62,14 @@ package
 		
 		private function onXMLLoaded(p_event:Event):void
 		{
-			var data:XML = new XML(this.m_loader.data);
+			var config:URLTrackerConfig = new URLTrackerConfigXMLDecoder().decode(new XML(this.m_loader.data));
 			
-			// create all trackers
-			TrackerManager.addTracker(GoogleTracker.ID, new GoogleTracker(this.stage));
-			TrackerManager.addTracker(OmnitureTracker.ID, new OmnitureTracker(this.stage));
-			TrackerManager.addTracker(URLTracker.ID, new URLTracker());	
+			this.m_tracker = new URLTracker();
+			this.m_tracker.config = config;
 			
-			// configure all trackers
-			OmnitureTracker(TrackerManager.getTracker(OmnitureTracker.ID)).config = new OmnitureTrackerConfigXMLDecoder().decode(data.omniture[0]);
-			GoogleTracker(TrackerManager.getTracker(GoogleTracker.ID)).config = new GoogleTrackerConfigXMLDecoder().decode(data.google[0]);
-			URLTracker(TrackerManager.getTracker(URLTracker.ID)).config = new URLTrackerConfigXMLDecoder().decode(data.URL[0]);
-			
-			// perform tracks
-			TrackerManager.track(new Track("track1", "test string"));
-			TrackerManager.track(new Track("track2", {id:"testid"}));
-			TrackerManager.track(new Track("track3", "test string"));
+			this.m_tracker.track(new Track("track1", "test string"));
+			this.m_tracker.track(new Track("track2", {id:"testid"}));
+			this.m_tracker.track(new Track("track3", "test string"));
 		}
 	}
 }

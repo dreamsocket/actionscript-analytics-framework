@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <modules>
+ 	<!--
+ 	<module>
+ 		<resource>com.dreamsocket.analytics.url.URLTrackerModule</resource>
+		<config>test_tracking_url.xml</config>		
+ 	</module>
+		-->
+ 	<module>
+ 		<resource>../bin/daf_google.swf</resource>
+ 		<config>
+			<enabled>true</enabled>
+			
+			<account>UA-5555555-5</account>
+			<visualDebug>false</visualDebug>	 
+			<trackingMode>AS3</trackingMode>	
+		
+			<handlers>
+				<handler>
+					<ID>track1</ID>
+					<type>trackPageView</type>
+					<params>				
+						<URL>${data} Scorecard Nav</URL>
+					</params>
+				</handler>	
+						
+				<handler>
+					<ID>track2</ID>
+					<type>trackEvent</type>
+					<params>
+						<category>LiveAt_videoevent1</category>
+						<action>o1</action>
+						<label>Mosiac Live Stream1</label>					
+						<value>1</value>
+					</params>
+				</handler>
+						
+				<handler>
+					<ID>track3</ID>
+					<type>trackEvent</type>
+					<params>
+						<category>LiveAt_videoevent2</category>
+						<action>o2</action>
+					</params>
+				</handler>	
+				
+																								
+			</handlers>
+		</config>
+ 	</module>
+
+	<module>
+		<resource>../bin/daf_omniture.swf</resource>
+		<config>
+			<enabled>true</enabled>
+			<params>
+				<account>foodotcom</account>
+				<dc>122</dc>
+				<delayTracking>2</delayTracking>
+				<trackingServer>stats.foo.com</trackingServer>
+				<visitorNameSpace>foo</visitorNameSpace> 
+				<trackLocal>true</trackLocal>
+			</params>
+			<handlers>
+				<handler>
+					<ID>track1</ID>
+					<type>trackLink</type>
+					<params>
+						<URL>LiveAt_videoevent</URL>
+						<type>o</type>
+						<name>Mosiac Live Stream</name>					
+						<params>
+							<prop7>${data} Leaderboard Link</prop7>
+							<eVar7>${data} Leaderboard Link</eVar7>
+						</params>
+					</params>
+				</handler>
+						
+				<handler>
+					<ID>track2</ID>
+					<type>trackLink</type>
+					<params>
+						<URL>LiveAt_videoevent</URL>
+						<type>o</type>
+						<name>Mosiac Live Stream</name>					
+						<params>
+							<prop6>${data.id} Scorecard Search</prop6>
+							<eVar7>${data.id} Scorecard Search</eVar7>
+							<events>event14</events>
+							<eVar8>foo</eVar8>
+						</params>
+					</params>
+				</handler>	
+				
+				<handler>
+					<ID>track3</ID>
+					<type>track</type>
+					<params>				
+						<params>
+							<eVar8>foo</eVar8>
+							<events>event17</events>
+						</params>
+					</params>
+				</handler>																							
+			</handlers>
+		</config>		
+	</module>
+ </modules>

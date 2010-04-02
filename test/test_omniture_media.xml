@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- tracking: OMNITURE -->
+<omniture>
+<!-- enabled: specifies whether Omniture tracking will be sent -->
+	<enabled>true</enabled>
+	<!-- params: 
+		allows you to generically assign values to all omniture values
+		NOTE: params set will be sent for every track
+		This can be use to set special props like <eVar23>pga_mosaic_player_09</eVar23>
+		-->
+	<params>
+		<account>foodotcom</account>
+		<dc>122</dc>
+		<delayTracking>2</delayTracking>
+		<trackingServer>stats.foo.com</trackingServer>
+		<visitorNameSpace>foo</visitorNameSpace> 
+		<trackLocal>true</trackLocal>
+		
+		<eVar1>test evar1</eVar1>
+		<eVar25>test evar25</eVar25>
+		<Media>
+			<playerName>livePlayer</playerName>
+			<trackEvents>event2</trackEvents>
+			<!--<trackMilestones>20,40,60,80</trackMilestones>-->
+			<trackSeconds>5</trackSeconds>
+			<!--<trackVars></trackVars>-->	
+			<trackWhilePlaying>true</trackWhilePlaying>	
+		</Media>
+	</params>
+	<handlers>
+		<handler>
+			<ID>mediaRequested</ID>
+			<type>Media.open</type>
+			<params>
+				<mediaName>${data.title}</mediaName>
+				<mediaLength>${data.duration}</mediaLength>
+				<mediaPlayerName>livePlayer</mediaPlayerName>					
+				<params>
+					<Media>
+						<trackEvents>event2</trackEvents>
+						<trackVars>eVar1,eVar25</trackVars>
+					</Media>
+				</params>
+			</params>
+		</handler>
+				
+		<handler>
+			<ID>mediaClosed</ID>
+			<type>Media.close</type>
+			<params>
+				<mediaName>${data.title}</mediaName>
+				<mediaOffset>${data.position}</mediaOffset>
+			</params>
+		</handler>	
+	
+		<handler>
+			<ID>mediaStarted</ID>
+			<type>Media.play</type>
+			<params>			
+				<mediaName>${data.title}</mediaName>
+				<mediaOffset>${data.position}</mediaOffset>
+			</params>
+		</handler>		
+		
+		<handler>
+			<ID>mediaPlaying</ID>
+			<type>Media.play</type>
+			<params>			
+				<mediaName>${data.title}</mediaName>
+				<mediaOffset>${data.position}</mediaOffset>
+			</params>
+		</handler>	
+		
+		
+		<handler>
+			<ID>mediaPaused</ID>
+			<type>Media.stop</type>
+			<params>			
+				<mediaName>${data.title}</mediaName>
+				<mediaOffset>${data.position}</mediaOffset>
+			</params>
+		</handler>	
+		
+		
+		<handler>
+			<ID>mediaPaused</ID>
+			<type>Media.track</type>
+			<params>			
+				<mediaName>${data.title}</mediaName>
+				<params>
+					<Media>
+						<trackVars>eVar7</trackVars>
+					</Media>					
+					<eVar7>evar7- Leaderboard Link</eVar7>
+				</params>
+			</params>
+		</handler>																													
+	</handlers>
+</omniture>

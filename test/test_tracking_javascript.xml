@@ -6,20 +6,18 @@
 	<!-- enabled: specifies whether url tracking will be sent -->
 	<enabled>true</enabled>	
 
-	<trackHandlers>
-		<trackHandler>
+	<handlers>
+		<handler>
 			<ID>track1</ID>
-			<methodCalls>
-				<methodCall>
-					<method>doJS</method>				
-					<arguments>
-						<argument>${data} a</argument>
-						<argument>b</argument>
-						<argument>c</argument>
-					</arguments>
-				</methodCall>
-			</methodCalls>
-		</trackHandler>				
+			<params>
+				<method>doJS</method>				
+				<arguments>
+					<argument>${data} a</argument>
+					<argument>b</argument>
+					<argument>c</argument>
+				</arguments>
+			</params>
+		</handler>				
 											
-	</trackHandlers>
+	</handlers>
 </JavaScript>

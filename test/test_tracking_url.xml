@@ -17,26 +17,26 @@
 			Thus a template of http://foo.com?{data.id} would replace {data.id} with the media's ID like http://foo.com?1234
 					
 	-->		
-	<trackHandlers>
-		<trackHandler>
+	<handlers>
+		<handler>
 			<ID>track1</ID>
-			<URLs>
+			<params>
 				<URL>http://foo.com/track1.gif</URL>
-			</URLs>
-		</trackHandler>				
+			</params>
+		</handler>				
 				
-		<trackHandler>
+		<handler>
 			<ID>track2</ID>
-			<URLs>
+			<params>
 				<URL>http://foo.com/track2.gif?id=${data.id}</URL>
-			</URLs>
-		</trackHandler>
+			</params>
+		</handler>
 		
-		<trackHandler>
+		<handler>
 			<ID>track3</ID>
-			<URLs>
+			<params>
 				<URL>http://foo.com/track3.gif?id=${data}</URL>
-			</URLs>
-		</trackHandler>								
-	</trackHandlers>
+			</params>
+		</handler>								
+	</handlers>
 </URL>

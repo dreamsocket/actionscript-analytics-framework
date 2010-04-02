@@ -28,14 +28,9 @@
 
 package  
 {
-	import flash.utils.Dictionary;
-
-	import com.dreamsocket.tracking.Track;
-	import com.dreamsocket.tracking.js.JSTrackerConfig;
-	import com.dreamsocket.tracking.js.JSMethodCall;
-	import com.dreamsocket.tracking.js.JSTrackerConfigXMLDecoder;
-	import com.dreamsocket.tracking.js.JSTracker;
-	import com.dreamsocket.tracking.js.JSTrackHandler;
+	import com.dreamsocket.analytics.Track;
+	import com.dreamsocket.analytics.js.JSTrackerConfigXMLDecoder;
+	import com.dreamsocket.analytics.js.JSTracker;
 	
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -58,15 +53,15 @@ package
 			this.m_loader.load(new URLRequest("test_tracking_javascript.xml"));
 
 			//var config:JSTrackerConfig = new JSTrackerConfig();
-			//var trackHandler:JSTrackHandler;
+			//var handler:JSTrackHandler;
 			//this.m_tracker = new JSTracker();
 			//this.m_tracker.config = config;			
-			//trackHandler = new JSTrackHandler();
-			//trackHandler.ID = "track3";
-			//trackHandler.methodCalls = [new JSMethodCall("doJS", [1, 2, "3...${data.id}"])];
+			//handler = new JSTrackHandler();
+			//handler.ID = "track3";
+			//handler.params = new JSMethodCall("doJS", [1, 2, "3...${data.id}"]);
 			
-			//config.trackHandlers["track1"] = trackHandler; 
-			//config.trackHandlers["track2"] = trackHandler; 
+			//config.handlers["track1"] = handler; 
+			//config.handlers["track2"] = handler; 
 			
 			//this.m_tracker.track(new Track("track1", "test string1"));
 			//this.m_tracker.track(new Track("track2", {id:"testid"}));

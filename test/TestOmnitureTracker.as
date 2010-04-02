@@ -27,10 +27,10 @@
  
 package  
 {
-	import com.dreamsocket.tracking.Track;
-	import com.dreamsocket.tracking.omniture.OmnitureTrackerConfig;
-	import com.dreamsocket.tracking.omniture.OmnitureTrackerConfigXMLDecoder;
-	import com.dreamsocket.tracking.omniture.OmnitureTracker;
+	import com.dreamsocket.analytics.Track;
+	import com.dreamsocket.analytics.omniture.OmnitureTrackerConfig;
+	import com.dreamsocket.analytics.omniture.OmnitureTrackerConfigXMLDecoder;
+	import com.dreamsocket.analytics.omniture.OmnitureTracker;
 	
 	import flash.display.Sprite;
 	import flash.events.Event;
