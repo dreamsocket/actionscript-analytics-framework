@@ -26,17 +26,26 @@
 **/
  
  
-package com.dreamsocket.tracking.js 
+package com.dreamsocket.analytics.omniture 
 {
-	public class JSMethodCall 
+	import com.dreamsocket.analytics.omniture.OmnitureMediaPlayParams;
+	import com.dreamsocket.analytics.omniture.OmnitureParamsXMLDecoder;
+	
+	public class OmnitureMediaPlayParamsXMLDecoder 
 	{
-		public var method:String;
-		public var arguments:Array;
 		
-		public function JSMethodCall(p_method:String = null, p_arguments:Array = null)
+		public function decode(p_XML:XML):OmnitureMediaPlayParams
 		{
-			this.method = p_method;
-			this.arguments = p_arguments == null ? [] : p_arguments;
+			var params:OmnitureMediaPlayParams = new OmnitureMediaPlayParams();
+			
+			if(p_XML.mediaName.toString().length)
+				params.mediaName = p_XML.mediaName.toString();
+			if(p_XML.mediaOffset.toString().length)
+				params.mediaOffset = p_XML.mediaOffset.toString();
+											
+			params.params = new OmnitureParamsXMLDecoder().decode(p_XML.params[0]);
+			
+			return params;			
 		}
 	}
 }

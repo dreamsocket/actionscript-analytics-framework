@@ -24,65 +24,50 @@
 * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 * OTHER DEALINGS IN THE SOFTWARE.
 **/
-  
-  
-package com.dreamsocket.tracking 
+ 
+package com.dreamsocket.analytics.omniture 
 {
-	import flash.utils.Dictionary;
+	import flash.display.Stage;
 
-	public class TrackingManager 
+	import com.omniture.ActionSource;
+
+	public class OmnitureSingleton 
 	{
-		protected static var k_enabled:Boolean = true;
-		protected static var k_trackers:Dictionary = new Dictionary();
-
-		
-		public function TrackingManager()
+		protected static var k_stage:Stage;
+		protected static var k_instance:ActionSource;
+	
+		public function OmnitureSingleton()
 		{
 		}
 		
 		
-		public static function get enabled():Boolean
+		public static function set stage(p_display:Stage):void
 		{
-			return k_enabled;
+			OmnitureSingleton.create(p_display);
+		}
+		
+	
+		public static function create(p_display:Stage):ActionSource
+		{
+			var mod:ActionSource = OmnitureSingleton.instance;
+			
+			if(p_display != null)
+			{
+				p_display.addChild(mod);
+			}
+			
+			return k_instance;
 		}	
 		
-				
-		public static function set enabled(p_enabled:Boolean):void
-		{
-			k_enabled = p_enabled;
-		}
-
-
 		
-		public static function track(p_track:ITrack):void
+		public static function get instance():ActionSource
 		{
-			if(!k_enabled) return;
-			
-			var tracker:Object;
-			
-			// send track payload to all trackers
-			for each(tracker in k_trackers)
+			if(k_instance == null)
 			{
-				ITracker(tracker).track(p_track);
+				k_instance = new ActionSource();
 			}
+			
+			return k_instance;
 		}
-
-		
-		public static function addTracker(p_ID:String, p_tracker:ITracker):void
-		{
-			k_trackers[p_ID] = p_tracker;
-		}
-		
-		
-		public static function getTracker(p_ID:String):ITracker
-		{
-			return k_trackers[p_ID] as ITracker;	
-		}
-		
-		
-		public static function removeTracker(p_ID:String):void
-		{
-			delete(k_trackers[p_ID]);	
-		}		
 	}
 }
