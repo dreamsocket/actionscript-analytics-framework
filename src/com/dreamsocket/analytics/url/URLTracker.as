@@ -28,6 +28,8 @@
  
 package com.dreamsocket.analytics.url 
 {
+	import flash.net.URLVariables;
+	import flash.net.URLRequest;
 	import flash.utils.Dictionary;
 
 	import com.dreamsocket.utils.PropertyStringUtil;	
@@ -115,16 +117,36 @@ package com.dreamsocket.analytics.url
 		{
 			if(!this.m_enabled) return;
 			
-			var handler:URLTrackHandler = this.m_handlers[p_track.type];
+			var handler:URLTrackHandler = this.m_handlers[p_track.ID];
 			
 			if(handler != null)
 			{ // has the track type
-				var URLs:Array = handler.params;
-				var i:uint = URLs.length;
+				var requests:Array = handler.params;
+				var i:uint = requests.length;
+				var request:URLRequest;
+				var prop:String;
+				var vars:Object;
+				var urlVars:URLVariables;
 				
 				while(i--)
 				{ 
-					HTTPUtil.pingURL(PropertyStringUtil.evalPropertyString(p_track.data, URLs[i]));
+					request = URLRequest(requests[i]);
+					request.url = (PropertyStringUtil.evalPropertyString(p_track.data, request.url));
+					vars = request.data;
+					if(vars is String)
+					{
+						PropertyStringUtil.evalPropertyString(p_track.data, String(vars));
+					}
+					else if(vars is Object)
+					{
+						request.data = urlVars = new URLVariables;
+						for(prop in vars)
+						{
+							urlVars[prop] = (PropertyStringUtil.evalPropertyString(p_track.data, vars[prop]));
+						}
+					}
+					
+					HTTPUtil.ping(request);
 				}
 			}
 		}

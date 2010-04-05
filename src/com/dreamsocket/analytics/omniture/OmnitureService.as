@@ -147,25 +147,28 @@ package com.dreamsocket.analytics.omniture
 
 		protected function trackMediaOpen(p_params:OmnitureMediaOpenParams):void
 		{
+			trace("open")
 			this.m_tracker.Media.open(p_params.mediaName, Number(p_params.mediaLength), p_params.mediaPlayerName);
 		}		
 		
 		
 		protected function trackMediaClose(p_params:OmnitureMediaCloseParams):void
 		{
-			this.m_tracker.Media.stop(p_params.mediaName, Number(p_params.mediaOffset));
+			trace("close")
 			this.m_tracker.Media.close(p_params.mediaName);
 		}		
 		
 		
 		protected function trackMediaPlay(p_params:OmnitureMediaPlayParams):void
 		{
+			trace("play")
 			this.m_tracker.Media.play(p_params.mediaName, Number(p_params.mediaOffset));
 		}						
 
 
 		protected function trackMediaStop(p_params:OmnitureMediaStopParams):void
 		{
+			trace("stop")
 			this.m_tracker.Media.stop(p_params.mediaName, Number(p_params.mediaOffset));
 		}	
 		

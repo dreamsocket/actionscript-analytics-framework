@@ -37,6 +37,7 @@ package com.dreamsocket.analytics.omniture
 	import com.dreamsocket.analytics.omniture.OmnitureTrackerConfig;
 	import com.dreamsocket.analytics.omniture.OmnitureTrackHandler;
 	import com.dreamsocket.analytics.omniture.OmnitureTrackType;
+	import com.dreamsocket.analytics.omniture.OmnitureBatchParamsMapper;
 	import com.dreamsocket.analytics.omniture.OmnitureMediaCloseParamsMapper;
 	import com.dreamsocket.analytics.omniture.OmnitureMediaOpenParamsMapper;
 	import com.dreamsocket.analytics.omniture.OmnitureMediaPlayParamsMapper;
@@ -53,6 +54,7 @@ package com.dreamsocket.analytics.omniture
 		protected var m_enabled:Boolean;
 		protected var m_service:OmnitureService;
 		protected var m_handlers:Dictionary;
+		protected var m_functions:Dictionary;
 		protected var m_paramMappers:Dictionary;
 		
 		public function OmnitureTracker(p_stage:Stage = null)
@@ -65,7 +67,18 @@ package com.dreamsocket.analytics.omniture
 			
 			this.m_handlers = new Dictionary();
 			
+			this.m_functions = new Dictionary();
+			this.m_functions[OmnitureTrackType.BATCH] = this.batch;
+			this.m_functions[OmnitureTrackType.MEDIA_CLOSE] = this.doTrack;
+			this.m_functions[OmnitureTrackType.MEDIA_OPEN] = this.doTrack;
+			this.m_functions[OmnitureTrackType.MEDIA_PLAY] = this.doTrack;
+			this.m_functions[OmnitureTrackType.MEDIA_STOP] = this.doTrack;
+			this.m_functions[OmnitureTrackType.MEDIA_TRACK] = this.doTrack;
+			this.m_functions[OmnitureTrackType.TRACK] = this.doTrack;
+			this.m_functions[OmnitureTrackType.TRACK_LINK] = this.doTrack;			
+			
 			this.m_paramMappers = new Dictionary();
+			this.m_paramMappers[OmnitureTrackType.BATCH] = new OmnitureBatchParamsMapper();
 			this.m_paramMappers[OmnitureTrackType.MEDIA_CLOSE] = new OmnitureMediaCloseParamsMapper();
 			this.m_paramMappers[OmnitureTrackType.MEDIA_OPEN] = new OmnitureMediaOpenParamsMapper();
 			this.m_paramMappers[OmnitureTrackType.MEDIA_PLAY] = new OmnitureMediaPlayParamsMapper();
@@ -134,12 +147,33 @@ package com.dreamsocket.analytics.omniture
 		{
 			if(!this.m_enabled) return;
 			
-			var handler:OmnitureTrackHandler = this.m_config.handlers[p_track.type];
+			var handler:OmnitureTrackHandler = this.m_config.handlers[p_track.ID];
 
-			if(handler != null && handler.params != null && this.m_paramMappers[handler.type] != null)
+			if(handler && this.m_functions[handler.type])
 			{ 	// has a track handler
-				this.m_service.track(handler.type, this.m_paramMappers[handler.type].map(handler.params, p_track.data));
-			}
+				this.m_functions[handler.type](handler, p_track.data);
+			}	
 		}
+		
+		
+		protected function doTrack(p_handler:OmnitureTrackHandler, p_data:*):void
+		{
+			if(p_handler.params != null && this.m_paramMappers[p_handler.type] != null)
+			{ 	// has a track handler
+				this.m_service.track(p_handler.type, this.m_paramMappers[p_handler.type].map(p_handler.params, p_data));
+			}			
+		}
+		
+		
+		protected function batch(p_handler:OmnitureTrackHandler, p_data:*):void
+		{
+			var params:Object = p_handler.params;
+			var i:uint = 0;
+			var len:uint = params.handlers.length;
+			while(i < len)
+			{
+				this.doTrack(OmnitureTrackHandler(params.handlers[i++]), p_data);
+			}
+		}		
 	}
 }

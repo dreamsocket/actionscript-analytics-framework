@@ -1,4 +1,4 @@
-/**
+﻿/**
 * Dreamsocket, Inc.
 * http://dreamsocket.com
 * Copyright  2010 Dreamsocket, Inc.
@@ -32,14 +32,17 @@ package com.dreamsocket.analytics.url
 	
 	import com.dreamsocket.analytics.url.URLTrackerConfig;
 	import com.dreamsocket.analytics.url.URLTrackHandler;
-	
+	import com.dreamsocket.analytics.url.URLTrackParamsXMLDecoder;
 
 	public class URLTrackerConfigXMLDecoder 
 	{	
+		protected var m_paramDecoder:URLTrackParamsXMLDecoder;
+		
 		public function URLTrackerConfigXMLDecoder()
 		{
+			this.m_paramDecoder = new URLTrackParamsXMLDecoder();
 		}
-		
+
 		
 		public function decode(p_xml:XML):URLTrackerConfig
 		{
@@ -63,16 +66,12 @@ package com.dreamsocket.analytics.url
 		protected function addTrack(p_handlers:Dictionary, p_handlerNode:XML):void
 		{		
 			var ID:String = p_handlerNode.ID.toString();
-			var urlNode:XML;
 			var handler:URLTrackHandler;
 			
 			if(ID.length > 0)
 			{
 				handler = new URLTrackHandler();
-				for each(urlNode in p_handlerNode.params.URL)
-				{
-					handler.params.push(urlNode.toString());
-				}
+				handler.params = this.m_paramDecoder.decode(p_handlerNode.params[0]);
 				handler.ID = ID;
 				p_handlers[ID] = handler;
 			}

@@ -11,11 +11,22 @@
 	<handlers>
 		<handler>
 			<ID>track1</ID>
-			<type>trackPageView</type>
-			<params>				
-				<URL>${data} Scorecard Nav</URL>
+			<type>batch</type>
+			<params>
+				<handler>
+					<type>trackPageView</type>
+					<params>				
+						<URL>${data} Scorecard Nav1</URL>
+					</params>
+				</handler>
+				<handler>
+					<type>trackPageView</type>
+					<params>				
+						<URL>${data} Scorecard Nav2</URL>
+					</params>
+				</handler>				
 			</params>
-		</handler>	
+		</handler>		
 				
 		<handler>
 			<ID>track2</ID>

@@ -115,7 +115,7 @@ package com.dreamsocket.analytics.js
 		{
 			if(!this.m_enabled) return;
 			
-			var handler:JSTrackHandler = this.m_handlers[p_track.type];
+			var handler:JSTrackHandler = this.m_handlers[p_track.ID];
 			
 			if(handler != null)
 			{ // has the track type

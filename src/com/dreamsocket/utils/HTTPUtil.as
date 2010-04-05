@@ -47,6 +47,19 @@ package com.dreamsocket.utils
 		{
 		}
 		
+	
+		public static function ping(p_request:URLRequest):void
+		{	
+			var loader:URLLoader = new URLLoader();
+						
+			loader.load(p_request);			
+			loader.addEventListener(Event.COMPLETE, HTTPUtil.onPingResult);
+			loader.addEventListener(IOErrorEvent.IO_ERROR, HTTPUtil.onPingResult);
+			loader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, HTTPUtil.onPingResult);
+
+			HTTPUtil.k_pings[loader] = true;
+		}
+			
 		
 		public static function pingURL(p_URL:String, p_clearCache:Boolean = true, p_rateInSecsToCache:Number = 0):void
 		{	

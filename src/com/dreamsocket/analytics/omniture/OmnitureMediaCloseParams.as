@@ -33,7 +33,6 @@ package com.dreamsocket.analytics.omniture
 	public class OmnitureMediaCloseParams 
 	{
 		public var mediaName:String;
-		public var mediaOffset:String;
 		public var params:OmnitureParams;
 		
 		public function OmnitureMediaCloseParams()

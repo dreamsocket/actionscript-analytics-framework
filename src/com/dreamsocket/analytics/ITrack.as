@@ -32,6 +32,6 @@ package com.dreamsocket.analytics
 	public interface ITrack 
 	{
 		function get data():*;
-		function get type():String;
+		function get ID():String;
 	}
 }

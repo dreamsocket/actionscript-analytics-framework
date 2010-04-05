@@ -45,7 +45,6 @@ package com.dreamsocket.analytics.omniture
 			var mapped:OmnitureMediaCloseParams = new OmnitureMediaCloseParams();
 			
 			mapped.mediaName = PropertyStringUtil.evalPropertyString(p_data, p_params.mediaName);
-			mapped.mediaOffset = PropertyStringUtil.evalPropertyString(p_data, p_params.mediaOffset);
 			mapped.params = new OmnitureParamsMapper().map(p_params.params, p_data);
 			
 			return mapped;				

@@ -21,21 +21,32 @@
 		<handler>
 			<ID>track1</ID>
 			<params>
-				<URL>http://foo.com/track1.gif</URL>
+				<request>
+					<URL>http://foo.com/track1.gif</URL>
+					<data>
+						<test1>this is a test val1</test1>
+						<test2>this is a test val2</test2>
+					</data>
+				</request>
 			</params>
 		</handler>				
 				
 		<handler>
 			<ID>track2</ID>
 			<params>
-				<URL>http://foo.com/track2.gif?id=${data.id}</URL>
+				<request>
+					<URL>http://foo.com/track2.gif?id=${data.id}</URL>
+					<data>post it</data>
+				</request>
 			</params>
 		</handler>
 		
 		<handler>
 			<ID>track3</ID>
 			<params>
-				<URL>http://foo.com/track3.gif?id=${data}</URL>
+				<request>
+					<URL>http://foo.com/track3.gif?id=${data}</URL>
+				</request>
 			</params>
 		</handler>								
 	</handlers>

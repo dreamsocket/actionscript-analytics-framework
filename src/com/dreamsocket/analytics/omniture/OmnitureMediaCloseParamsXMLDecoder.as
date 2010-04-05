@@ -40,8 +40,6 @@ package com.dreamsocket.analytics.omniture
 			
 			if(p_XML.mediaName.toString().length)
 				params.mediaName = p_XML.mediaName.toString();
-			if(p_XML.mediaOffset.toString().length)
-				params.mediaOffset = p_XML.mediaOffset.toString();
 														
 			params.params = new OmnitureParamsXMLDecoder().decode(p_XML.params[0]);
 			

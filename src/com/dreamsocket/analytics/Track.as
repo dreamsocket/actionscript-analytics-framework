@@ -33,11 +33,11 @@ package com.dreamsocket.analytics
 	public class Track implements ITrack
 	{
 		protected var m_data:*;
-		protected var m_type:String;
+		protected var m_ID:String;
 		
-		public function Track(p_type:String, p_data:* = null)
+		public function Track(p_ID:String, p_data:* = null)
 		{
-			this.m_type = p_type;
+			this.m_ID = p_ID;
 			this.m_data = p_data;
 		}
 
@@ -48,9 +48,9 @@ package com.dreamsocket.analytics
 		}
 		
 		
-		public function get type():String
+		public function get ID():String
 		{
-			return this.m_type;
+			return this.m_ID;
 		}
 	}
 }

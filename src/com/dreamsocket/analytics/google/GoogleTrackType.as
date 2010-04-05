@@ -30,6 +30,7 @@ package com.dreamsocket.analytics.google
 
 	public class GoogleTrackType 
 	{
+		public static const BATCH:String = "batch";
 		public static const TRACK_PAGE_VIEW:String = "trackPageView";
 		public static const TRACK_EVENT:String = "trackEvent";
 	}

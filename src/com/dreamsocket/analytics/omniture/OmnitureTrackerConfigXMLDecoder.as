@@ -1,4 +1,4 @@
-/**
+﻿/**
 * Dreamsocket, Inc.
 * http://dreamsocket.com
 * Copyright  2010 Dreamsocket, Inc.
@@ -35,6 +35,7 @@ package com.dreamsocket.analytics.omniture
 	import com.dreamsocket.analytics.omniture.OmnitureTrackHandler;
 	import com.dreamsocket.analytics.omniture.OmnitureTrackType;
 	
+	import com.dreamsocket.analytics.omniture.OmnitureBatchParamsXMLDecoder;
 	import com.dreamsocket.analytics.omniture.OmnitureTrackParamsXMLDecoder;
 	import com.dreamsocket.analytics.omniture.OmnitureTrackLinkParamsXMLDecoder;
 	import com.dreamsocket.analytics.omniture.OmnitureMediaCloseParamsXMLDecoder;
@@ -50,6 +51,7 @@ package com.dreamsocket.analytics.omniture
 		public function OmnitureTrackerConfigXMLDecoder()
 		{
 			this.m_decoders = new Dictionary();
+			this.m_decoders[OmnitureTrackType.BATCH] = new OmnitureBatchParamsXMLDecoder();
 			this.m_decoders[OmnitureTrackType.TRACK] = new OmnitureTrackParamsXMLDecoder();
 			this.m_decoders[OmnitureTrackType.TRACK_LINK] = new OmnitureTrackLinkParamsXMLDecoder();
 			this.m_decoders[OmnitureTrackType.MEDIA_TRACK] = new OmnitureMediaTrackParamsXMLDecoder();
@@ -66,13 +68,13 @@ package com.dreamsocket.analytics.omniture
 			
 			config.enabled = p_xml.enabled.toString() != "false";
 			config.params = new OmnitureParamsXMLDecoder().decode(p_xml.params[0]);
-			this.setTrackHandlers(config.handlers, p_xml.handlers.handler);
+			this.createHandlers(config.handlers, p_xml.handlers.handler);
 		
 			return config;
 		}		
 		
 		
-		public function setTrackHandlers(p_handlers:Dictionary, p_handlerNodes:XMLList):void
+		protected function createHandlers(p_handlers:Dictionary, p_handlerNodes:XMLList):void
 		{
 			var handler:OmnitureTrackHandler;
 			var handlerNode:XML;
@@ -85,12 +87,12 @@ package com.dreamsocket.analytics.omniture
 					handler = new OmnitureTrackHandler();
 					handler.ID = ID;
 					handler.type = handlerNode.type.toString();
-					
+			
 					if(this.m_decoders[handler.type])
 					{
-						handler.params = this.m_decoders[handler.type].decode(handlerNode.params[0]);
-						p_handlers[ID] = handler;
-					}
+						handler.params = this.m_decoders[handler.type].decode(handlerNode.params[0]);				
+					}	
+					p_handlers[ID] = handler;
 				}
 			}	
 		}

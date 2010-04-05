@@ -30,6 +30,7 @@ package com.dreamsocket.analytics.google
 {
 	import flash.utils.Dictionary;
 
+	import com.dreamsocket.analytics.google.GoogleBatchParamsXMLDecoder;
 	import com.dreamsocket.analytics.google.GoogleTrackerConfig;
 	import com.dreamsocket.analytics.google.GoogleTrackHandler;
 	import com.dreamsocket.analytics.google.GoogleTrackEventParamsXMLDecoder;
@@ -49,6 +50,8 @@ package com.dreamsocket.analytics.google
 			super();
 			
 			this.m_decoders = new Dictionary();
+			
+			this.m_decoders[GoogleTrackType.BATCH] = new GoogleBatchParamsXMLDecoder();
 			this.m_decoders[GoogleTrackType.TRACK_EVENT] = new GoogleTrackEventParamsXMLDecoder();
 			this.m_decoders[GoogleTrackType.TRACK_PAGE_VIEW] = new GoogleTrackPageViewParamsXMLDecoder();
 		}
@@ -65,13 +68,13 @@ package com.dreamsocket.analytics.google
 			config.trackingMode = p_XML.trackingMode.toString() == TrackerMode.AS3 ? TrackerMode.AS3 : TrackerMode.BRIDGE;
 			config.visualDebug = p_XML.visualDebug.toString() != "false";	
 			
-			this.setTrackHandlers(config.handlers, p_XML.handlers.handler);
+			this.createHandlers(config.handlers, p_XML.handlers.handler);
 		
 			return config;
 		}		
 		
 		
-		public function setTrackHandlers(p_handlers:Dictionary, p_handlerNodes:XMLList):void
+		protected function createHandlers(p_handlers:Dictionary, p_handlerNodes:XMLList):void
 		{
 			var handler:GoogleTrackHandler;
 			var handlerNode:XML;
@@ -85,14 +88,14 @@ package com.dreamsocket.analytics.google
 					handler = new GoogleTrackHandler();
 					handler.ID = ID;
 					handler.type = handlerNode.type.toString();
-					
+			
 					if(this.m_decoders[handler.type])
 					{
-						handler.params = this.m_decoders[handler.type].decode(handlerNode.params[0]);
-						p_handlers[ID] = handler;
+						handler.params = this.m_decoders[handler.type].decode(handlerNode.params[0]);				
 					}
+					p_handlers[ID] = handler;
 				}
 			}	
-		}
+		}	
 	}
 }

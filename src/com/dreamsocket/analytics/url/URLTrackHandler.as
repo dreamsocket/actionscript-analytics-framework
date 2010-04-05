@@ -28,16 +28,15 @@
  
 package com.dreamsocket.analytics.url 
 {
-	
 	public class URLTrackHandler 
 	{
 		public var ID:String;
 		public var params:Array;
 		
-		public function URLTrackHandler(p_ID:String = null, p_URLs:Array = null)
+		public function URLTrackHandler(p_ID:String = null, p_params:Array = null)
 		{
 			this.ID = p_ID;
-			this.params = p_URLs == null ? [] : p_URLs;
+			this.params = p_params;
 		}
 	}
 }

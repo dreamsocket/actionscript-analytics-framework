@@ -26,17 +26,29 @@
 **/
  
  
-package com.dreamsocket.analytics.omniture 
+ 
+ 
+package com.dreamsocket.analytics.google 
 {
-	public class OmnitureTrackType 
+	import com.dreamsocket.analytics.google.GoogleTrackEventParams;
+	import com.dreamsocket.utils.PropertyStringUtil;
+	
+	public class GoogleTrackEventParamsMapper 
 	{
-		public static const BATCH:String = "batch";
-		public static const TRACK:String = "track";
-		public static const TRACK_LINK:String = "trackLink";
-		public static const MEDIA_TRACK:String = "Media.track";
-		public static const MEDIA_OPEN:String = "Media.open";
-		public static const MEDIA_CLOSE:String = "Media.close";
-		public static const MEDIA_PLAY:String = "Media.play";
-		public static const MEDIA_STOP:String = "Media.stop";
+		public function GoogleTrackEventParamsMapper()
+		{
+		}
+		
+		public function map(p_params:GoogleTrackEventParams, p_data:*):GoogleTrackEventParams
+		{
+			var mapped:GoogleTrackEventParams = new GoogleTrackEventParams();
+			
+			mapped.category = PropertyStringUtil.evalPropertyString(p_data, p_params.category);
+			mapped.action = PropertyStringUtil.evalPropertyString(p_data, p_params.action);
+			mapped.label = PropertyStringUtil.evalPropertyString(p_data, p_params.label);
+			mapped.value = (PropertyStringUtil.evalPropertyString(p_data, p_params.value)); 			
+			
+			return mapped;				
+		}	
 	}
 }
