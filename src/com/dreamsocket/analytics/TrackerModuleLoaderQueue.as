@@ -78,7 +78,6 @@ package com.dreamsocket.analytics
 			}
 			else
 			{
-				trace("done")
 				this.dispatchEvent(new Event(Event.COMPLETE));
 			}
 		}
@@ -86,14 +85,13 @@ package com.dreamsocket.analytics
 		
 		private function onModuleFailed(p_event:TrackerModuleLoaderEvent):void
 		{
-			trace("failed")
+			trace(p_event)
 			this.load();
 		}
 		
 		
 		private function onModuleLoaded(p_event:TrackerModuleLoaderEvent):void
 		{
-			trace("created" + p_event.tracker)
 			TrackerManager.addTracker(p_event.tracker.ID, p_event.tracker);
 			this.load();
 		}		
