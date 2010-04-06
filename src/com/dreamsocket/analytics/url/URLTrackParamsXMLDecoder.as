@@ -30,7 +30,6 @@ package com.dreamsocket.analytics.url
 {
 	import flash.net.URLRequest;
 	import flash.net.URLRequestMethod;
-	import flash.net.URLVariables;
 
 	public class URLTrackParamsXMLDecoder 
 	{

@@ -39,21 +39,21 @@ package com.dreamsocket.analytics
 		public static const MODULE_LOADED:String = "moduleLoaded";
 		public static const MODULE_FAILED:String = "moduleFailed";
 	
-		private var m_resource:TrackerModuleLoaderParams;
+		private var m_params:TrackerModuleLoaderParams;
 		private var m_tracker:ITracker;
 	
 	
-		public function TrackerModuleLoaderEvent(p_eventType:String, p_resource:TrackerModuleLoaderParams, p_tracker:ITracker = null, p_bubbles:Boolean = false, p_cancelable:Boolean = false) 
+		public function TrackerModuleLoaderEvent(p_eventType:String, p_params:TrackerModuleLoaderParams, p_tracker:ITracker = null, p_bubbles:Boolean = false, p_cancelable:Boolean = false) 
 		{
 			super(p_eventType, p_bubbles, p_cancelable);
-			this.m_resource = p_resource;
+			this.m_params = p_params;
 			this.m_tracker = p_tracker;
 		}
 	
 	
-		public function get resource():TrackerModuleLoaderParams 
+		public function get params():TrackerModuleLoaderParams 
 		{
-			return this.m_resource;
+			return this.m_params;
 		}
 	
 	
@@ -65,7 +65,7 @@ package com.dreamsocket.analytics
 		      
 		override public function clone():Event 
 		{
-			return new TrackerModuleLoaderEvent(this.type, this.resource, this.tracker, this.bubbles, this.cancelable);
+			return new TrackerModuleLoaderEvent(this.type, this.params, this.tracker, this.bubbles, this.cancelable);
 		}
 		
 		

@@ -85,7 +85,7 @@ package com.dreamsocket.analytics
 		
 		private function onModuleFailed(p_event:TrackerModuleLoaderEvent):void
 		{
-			trace(p_event)
+			trace(p_event);
 			this.load();
 		}
 		
