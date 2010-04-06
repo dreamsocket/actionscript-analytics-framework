@@ -11,6 +11,7 @@
 	<property name="build.version.build" 	value="0" />
 	
 	<!-- DIRECTORIES -->
+	<property name="project.docs" 		value="${basedir}/docs/"/>
 	<property name="project.libs" 		value="${basedir}/libs/"/>
 	<property name="project.output" 	value="${basedir}/bin/" />
 	<property name="project.src" 		value="${basedir}/src/" />		
@@ -112,6 +113,27 @@
 			<zipfileset dir="${basedir}" includes="bin/**,libs/**,src/**,test/**,build.xml" />
 		</zip>
     </target>		
+	
+	<!-- BUILD DOCS -->
+    <target name="buildDocs"> 
+    	<delete dir="${project.docs}"/>
+    	<mkdir dir="${project.docs}"/>
+        <asdoc 
+        	output="${project.docs}" 
+        	lenient="true" 
+			failonerror="true" 
+        	main-title="${project.name} ${build.version.major}.${build.version.minor}.${build.date}"
+        	window-title="${project.name} ${build.version.major}.${build.version.minor}.${build.date}"> 
+        	
+            <doc-sources path-element="${project.src}"/> 
+	 		<compiler.library-path 
+	     		dir="${basedir}" 
+	  			append="true">
+			<include 
+				name="libs" />
+			</compiler.library-path>
+        </asdoc> 
+    </target> 
 	
 </project>
 
