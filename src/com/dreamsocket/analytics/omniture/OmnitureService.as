@@ -55,9 +55,9 @@ package com.dreamsocket.analytics.omniture
 		protected var m_functions:Dictionary;
 
 		
-		public function OmnitureService(p_stage:Stage = null)
+		public function OmnitureService(p_stage:Stage = null, p_actionSource:ActionSource = null)
 		{
-			this.m_tracker = OmnitureSingleton.create(p_stage);
+			this.m_tracker = OmnitureSingleton.create(p_stage, p_actionSource);
 			this.m_enabled = true;
 			
 			this.m_functions = new Dictionary();

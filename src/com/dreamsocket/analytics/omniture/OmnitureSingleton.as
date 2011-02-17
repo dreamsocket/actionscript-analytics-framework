@@ -47,11 +47,14 @@ package com.dreamsocket.analytics.omniture
 		}
 		
 	
-		public static function create(p_display:Stage):ActionSource
+		public static function create(p_display:Stage, p_actionSource:ActionSource = null):ActionSource
 		{
+			if(p_actionSource)
+				k_instance = p_actionSource;
+			
 			var mod:ActionSource = OmnitureSingleton.instance;
 			
-			if(p_display != null)
+			if(p_display != null && !mod.parent)
 			{
 				p_display.addChild(mod);
 			}
@@ -69,5 +72,11 @@ package com.dreamsocket.analytics.omniture
 			
 			return k_instance;
 		}
+		
+		
+		public static function set instance(p_value:ActionSource):void
+		{
+			k_instance = p_value;
+		}		
 	}
 }

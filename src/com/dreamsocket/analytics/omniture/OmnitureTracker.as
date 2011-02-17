@@ -46,6 +46,8 @@ package com.dreamsocket.analytics.omniture
 	import com.dreamsocket.analytics.omniture.OmnitureTrackParamsMapper;
 	import com.dreamsocket.analytics.omniture.OmnitureTrackLinkParamsMapper;
 	
+	import com.omniture.ActionSource;
+	
 	public class OmnitureTracker implements ITracker
 	{
 		public static const ID:String = "OmnitureTracker";
@@ -57,13 +59,13 @@ package com.dreamsocket.analytics.omniture
 		protected var m_functions:Dictionary;
 		protected var m_paramMappers:Dictionary;
 		
-		public function OmnitureTracker(p_stage:Stage = null)
+		public function OmnitureTracker(p_stage:Stage = null, p_actionSource:ActionSource = null)
 		{
 			super();
 			
 			this.m_config = new OmnitureTrackerConfig();
 			this.m_enabled = true;
-			this.m_service = new OmnitureService(p_stage);
+			this.m_service = new OmnitureService(p_stage, p_actionSource);
 			
 			this.m_handlers = new Dictionary();
 			

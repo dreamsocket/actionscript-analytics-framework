@@ -49,16 +49,22 @@ package com.dreamsocket.utils
 		}
 		
 		
-		protected static function evalSinglePropertyString(p_data:*, p_value:String = null):*
+		public static function evalSinglePropertyString(p_data:*, p_value:String = null):*
 		{
+			var key:String;
 			var val:String = p_value == null ? "" : p_value; 
 			var currPart:* = p_data;
-			var parts:Array;
-			var key:String;
+			var parts:Array = val.match(new RegExp( "\\['.+?'\\]", "gi"));
+			var i:uint = parts.length;
+			while(i--)
+			{
+				val = val.replace(parts[i], parts[i].replace(new RegExp("\\.", "gi"), "@@@@"));
+			}
+			val = val.replace(new RegExp("\\['", "gi"), ".");
+			val = val.replace(new RegExp("'\\]", "gi"), "");			
 			
 			parts = val.split(".");
 			key = parts.shift();
-			
 			switch(key)
 			{
 				case "cache.UID":
@@ -67,18 +73,19 @@ package com.dreamsocket.utils
 				case "data":
 					try
 					{
-						var i:uint = 0;
+						i = 0;
 						var len:uint = parts.length;
 						if(len != 0)
 						{
 							for(; i < len; i++)
 							{
-								currPart = currPart[parts[i]];
+								currPart = currPart[parts[i].replace(new RegExp("@@@@", "gi"), ".")];
 							}
 						}
 					}
 					catch(error:Error)
 					{
+						trace("PropertyStringUtil.evalSinglePropertyString -" + error)
 						currPart = null;
 					}	
 					break;				

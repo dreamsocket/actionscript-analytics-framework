@@ -118,24 +118,27 @@ package com.dreamsocket.analytics.url
 			if(!this.m_enabled) return;
 			
 			var handler:URLTrackHandler = this.m_handlers[p_track.ID];
-			
+	
 			if(handler != null)
 			{ // has the track type
 				var requests:Array = handler.params;
 				var i:uint = requests.length;
 				var request:URLRequest;
+				var requestParams:URLRequest;
 				var prop:String;
 				var vars:Object;
 				var urlVars:URLVariables;
 				
 				while(i--)
 				{ 
-					request = URLRequest(requests[i]);
-					request.url = (PropertyStringUtil.evalPropertyString(p_track.data, request.url));
-					vars = request.data;
+					requestParams = URLRequest(requests[i]);
+					request = new URLRequest();
+					request.method = requestParams.method;
+					request.url = (PropertyStringUtil.evalPropertyString(p_track.data, requestParams.url));
+					vars = requestParams.data;
 					if(vars is String)
 					{
-						PropertyStringUtil.evalPropertyString(p_track.data, String(vars));
+						request.data = PropertyStringUtil.evalPropertyString(p_track.data, String(vars));
 					}
 					else if(vars is Object)
 					{
