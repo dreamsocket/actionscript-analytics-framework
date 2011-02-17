@@ -31,7 +31,9 @@ package com.dreamsocket.utils
 	import flash.events.Event;
 	import flash.events.IOErrorEvent;
 	import flash.events.SecurityErrorEvent;
+	import flash.net.sendToURL;
 	import flash.net.URLRequest;
+	import flash.net.URLRequestMethod;
 	import flash.net.URLLoader;
 	import flash.system.Security;
 	import flash.utils.Dictionary;
@@ -50,14 +52,21 @@ package com.dreamsocket.utils
 	
 		public static function ping(p_request:URLRequest):void
 		{	
-			var loader:URLLoader = new URLLoader();
-						
-			loader.load(p_request);			
-			loader.addEventListener(Event.COMPLETE, HTTPUtil.onPingResult);
-			loader.addEventListener(IOErrorEvent.IO_ERROR, HTTPUtil.onPingResult);
-			loader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, HTTPUtil.onPingResult);
-
-			HTTPUtil.k_pings[loader] = true;
+			if(p_request.method == URLRequestMethod.POST)
+			{
+				var loader:URLLoader = new URLLoader();
+							
+				loader.load(p_request);			
+				loader.addEventListener(Event.COMPLETE, HTTPUtil.onPingResult);
+				loader.addEventListener(IOErrorEvent.IO_ERROR, HTTPUtil.onPingResult);
+				loader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, HTTPUtil.onPingResult);
+	
+				HTTPUtil.k_pings[loader] = true;
+			}
+			else
+			{
+				sendToURL(p_request);
+			}
 		}
 			
 		
@@ -65,20 +74,14 @@ package com.dreamsocket.utils
 		{	
 			if(p_URL == null) return;
 			
-			var loader:URLLoader = new URLLoader();
 			var URL:String = p_URL;
 			
 			if(p_clearCache && (HTTPUtil.allowLocalQueryStrings || Security.sandboxType == Security.REMOTE))
 			{	
 				URL = HTTPUtil.resolveUniqueURL(p_URL, p_rateInSecsToCache);
 			}
-						
-			loader.load(new URLRequest(URL));			
-			loader.addEventListener(Event.COMPLETE, HTTPUtil.onPingResult);
-			loader.addEventListener(IOErrorEvent.IO_ERROR, HTTPUtil.onPingResult);
-			loader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, HTTPUtil.onPingResult);
-
-			HTTPUtil.k_pings[loader] = true;
+				
+			HTTPUtil.ping(new URLRequest(URL));
 		}
 		
 		
